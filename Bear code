@@ -1,0 +1,118 @@
+import SwiftUI
+
+struct Triangle: Shape { // Create a custom shape. This is a triangle.
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        
+        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.midX, y: rect.minY))
+        
+        return path
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        ZStack {
+            Circle()  // Creates ear 1
+                .stroke(lineWidth: 4)
+                .frame(width: 50, height: 50)
+                .offset(x: 38, y: -100)
+                .rotationEffect(.degrees(30))
+            
+            Circle() // Creates ear 2
+                .stroke(lineWidth: 4)
+                .frame(width: 50, height: 50)
+                .offset(x: -38, y: -100)
+                .rotationEffect(.degrees(-30))
+            
+            Ellipse() // Creates face
+                .strokeBorder(.black, lineWidth: 1)
+                .background(Ellipse().fill(.brown))
+                .frame(width: 200, height: 170)
+            
+            ZStack{ // eyes
+                
+                Circle()
+                    .frame(width: 44, height: 50)
+                    .offset(x: -38, y: 0)
+                
+                Circle()
+                    .frame(width: 44, height: 50)
+                    .offset(x: +38, y: 0)
+                
+                
+                Circle()
+                    .fill(.brown)
+                    .frame(width: 30, height: 50)
+                    .offset(x: -35, y: 0)
+                
+                Circle()
+                    .fill(.black)
+                    .frame(width: 20, height: 50)
+                    .offset(x: -35, y: 0)
+                
+                Circle()
+                    .fill(.white)
+                    .frame(width: 10, height: 50)
+                    .offset(x: -35, y: -10)
+                
+                Circle()
+                    .fill(.white)
+                    .frame(width: 5, height: 50)
+                    .offset(x: -39, y: 9)
+                
+                Circle()
+                    .fill(.brown)
+                    .frame(width: 30, height: 50)
+                    .offset(x: +35, y: 0)
+                
+                Circle()
+                    .fill(.black)
+                    .frame(width: 20, height: 50)
+                    .offset(x: +35, y: 0)
+                
+                
+            }
+            
+            ZStack{ // Creates whiskers.
+                Rectangle()
+                    .stroke(lineWidth: 1)
+                    .frame(width: 35, height: 1)
+                    .offset(x: +90, y: 10)
+                    .rotationEffect(.degrees(15))
+                
+                Rectangle()
+                    .stroke(lineWidth: 1)
+                    .frame(width: 35, height: 1)
+                    .offset(x: +90, y: 10)
+                    .rotationEffect(.degrees(25))
+                
+                Rectangle()
+                    .stroke(lineWidth: 1)
+                    .frame(width: 35, height: 1)
+                    .offset(x: -90, y: 10)
+                    .rotationEffect(.degrees(-15))
+                
+                Rectangle()
+                    .stroke(lineWidth: 1)
+                    .frame(width: 35, height: 1)
+                    .offset(x: -90, y: 10)
+                    .rotationEffect(.degrees(-25))
+            }
+            
+            Circle() // nose
+                .fill(.red) // Can't have strock and fill at the same time
+                .frame(width: 20, height: 15)
+                .offset(x: 0, y: -30)
+                .rotationEffect(.degrees(-180))
+            
+            Text("I") // mouth
+                .rotationEffect(.degrees(90))
+                .font(.title)
+                .offset(x: 0, y: 50)
+        }
+    }
+}
